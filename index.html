@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>CARP & MAC FORM 512 - 1º/5º GAV</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/jspdf.umd.min.js"></script>
+    <link rel="manifest" href="manifest.json">
+</head>
+
+<body>
+
+    <div class="sidebar">
+        <h3>Variáveis do Lançamento (ZL)</h3>
+        <div class="input-grid">
+            <div class="input-group">
+                <label>Drop Altitude (FT)</label>
+                <input type="number" id="inDA" value="500">
+            </div>  
+            <div class="input-group">
+                <label>Terrain Elev. (FT)</label>
+                <input type="number" id="inTE" value="254">
+            </div>
+            <div class="input-group">
+                <label>IAS Lançamento (KT)</label>
+                <input type="number" id="inIAS" value="110">
+            </div>
+            <div class="input-group">
+                <label>Eixo de Lançamento (Graus)</label>
+                <input type="number" id="inMC" value="114">
+            </div>
+            <div class="input-group">
+                <label>QNH (hPa)</label>
+                <input type="number" id="inQNH" value="1013" step="1.0">
+            </div>
+            <div class="input-group">
+                <label>Temp ZL (°C)</label>
+                <input type="number" id="inTemp" value="25">
+            </div>
+            <div class="input-group">
+                <label>Intensidade do Vento (KT)</label>
+                <input type="number" id="inVentokt" value="6">
+            </div>
+            <div class="input-group">
+                <label>Direção do Vento (º)</label>
+                <input type="number" id="inVentodir" value="130">
+            </div>
+        </div>
+
+        <button onclick="calcularTudo()">ATUALIZAR CARP & MAC FORM</button>
+        <button onclick="gerarPDF()">GERAR PDF DO CARP</button>
+
+        <div class="mac-header">MAC FORM 512 (COMPUTED DATA)</div>
+        <table class="mac-table" id="tabelaMacForm">
+            <tr>
+                <th>#</th>
+                <th>Descrição do Fator</th>
+                <th>Valor</th>
+            </tr>
+        </table>
+    </div>
+
+    <div class="main-content">
+        <canvas id="carpCanvas" width="800" height="1000"></canvas>
+    </div>
+    <script 
+    src="js/script.js">
+    </script>
+    <script>
+    if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./service-worker.js')
+        .then(reg => console.log('Service Worker registrado!', reg))
+        .catch(err => console.error('Erro ao registrar:', err));
+    }
+    </script>
+</body>
+
+</html>
